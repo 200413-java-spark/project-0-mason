@@ -9,10 +9,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.io.File;
 
-
-public class MyServer 
+public class MyServer
 {
+
 
     public static void StartServer() throws Exception
     {
@@ -33,8 +34,8 @@ public class MyServer
                 //See if anyone connects
                 client = myServer.accept(); 
                 //create the clients input and output streams
-                //DataInputStream dis = new DataInputStream(client.getInputStream());
-                //DataOutputStream dos = new DataOutputStream(client.getOutputStream());
+//                DataInputStream dis = new DataInputStream(client.getInputStream());
+//                DataOutputStream dos = new DataOutputStream(client.getOutputStream());
                 //create thread for new client
                 Thread clientThread = new NewClient(client);//, dis, dos);
                 //Start Thread
@@ -58,6 +59,7 @@ public class MyServer
             System.out.println("Server Is now closed");
         }        
     }
+
 
 
 }

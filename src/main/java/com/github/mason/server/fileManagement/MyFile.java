@@ -22,14 +22,17 @@ public class MyFile
 
         //pageWriter = new PrintWriter(client.getOutputStream());//Make a writer for the output stream to the client
 
-        //This was hardcoded, It was in the file but it would break the html page when sent
-        pageWriter.println("HTTP/1.1 200 OK");
-        pageWriter.println("Content-Type: text/html");
-        pageWriter.println("\r\n");
+
 
         //Connect buffered reader to a filereader that reads the file
         BufferedReader reader = new BufferedReader(new FileReader(page));//grab a file and put it into the buffer
 
+        //This was hardcoded, It was in the file but it would break the html page when sent
+        pageWriter.println("HTTP/1.1 200 OK");
+        pageWriter.println("Content-Type: text/html");
+        pageWriter.println("Content-Length: " + page.length() + "\r\n");
+        pageWriter.println("\r\n");
+        
         String line = reader.readLine();//line to go line by line from file
         while(line != null)//repeat till the file is empty
         {
@@ -38,6 +41,7 @@ public class MyFile
         }
         reader.close();//close the reader
         pageWriter.flush();//flush the writer and keep the socket open
+        
 //        pageWriter.close();
 //        GetRequest(client);
     }
