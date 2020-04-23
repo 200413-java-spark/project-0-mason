@@ -1,0 +1,173 @@
+body, html {
+  height: 100%;
+}
+
+/*Makes a half sized image of whatever is chosen in the url*/
+.bg {
+  /* The image used */
+  background-image: url("../../Images/bowl-cropped.jpg");
+
+  /* Half height */
+  height: 50%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+
+
+}
+
+.thumbnail iframe {
+  width: 1440px;
+  height: 900px;
+}
+
+ 
+img.contactImg{
+  
+width: 100%;
+height:auto;
+max-height: 300px;
+object-fit:cover;  
+}
+ 
+h6.inlineHeader{
+    display: inline;
+}
+h5.inlineHeader{
+    display: inline;
+}
+h4.inlineHeader{
+    display: inline;
+}
+
+h3.inlineHeader{
+    display: inline;
+}
+h2.inlineHeader{
+    display: inline;
+}
+
+p.inlineHeader{
+    display:inline;
+}
+
+a.inlineHeader{
+    display: inline;
+}
+
+img.inlineHeader{
+    display:inline;
+}
+form.inlineHeader{
+    display:inline;
+}
+
+.top-buffer { margin-top:20px; }
+
+.bot-buffer { margin-bottom: 20px;}
+
+#stickyside.container{
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+
+nav{
+    position: sticky;
+    top: 0;
+}
+  li.dark{
+      background-color:rgb(87,87,87);
+      pointer-events: none;
+  }
+/* This code makes text grow to a relative size based on window view size. Usefull if text is popping out of 
+cards, buttons, images, etc. when they are resizeing. Just add a markup to modify to expand it*/
+@media screen and (min-width: 766px) {
+  p.relative {
+    font-size: 1.2vw;
+  }
+  h5.relative{
+    font-size: 1.7vw;      
+  }
+  
+
+ 
+    .logocontainer{
+        min-height:250px; 
+        max-height:250px;
+        overflow:hidden        
+    }
+
+
+ 
+    .logoback{
+        position:relative;
+        top:0;
+        left:0;
+        object-fit:cover;
+
+        width:100%;
+
+        margin-top:0px;
+        margin-bottom:0px;
+        min-height:250px;
+
+    } 
+  
+    .logo{
+        position:absolute;
+        width:200px;
+        height:200px;
+    
+    }
+  
+  
+}
+
+@media screen and (max-width: 767px) {
+   p.relative {
+    font-size: 3vw;
+  }
+   h5.relative{
+    font-size: 3.5vw;      
+  }
+ 
+    .logocontainer{
+        min-height:250px; 
+        max-height:250px;
+        overflow:hidden;        
+    }
+
+    .logoback{
+        position:relative;
+        top:0;
+        left:0;
+        object-fit:cover;
+
+        width:100%;
+        
+        margin-top:0px;
+        margin-bottom:0px;
+        min-height:250px;        
+        
+    } 
+  
+    .logo{
+        position:absolute;
+        width:200px;
+        height:200px;
+        left:23%;
+        top:5%;
+
+    
+    }
+
+
+ 
+}
+
+

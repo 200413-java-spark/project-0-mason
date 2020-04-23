@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>MasNotes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../../../Home/Bootstrap/Custom/simplehome.css">
+        <link rel="stylesheet" type="text/css" href="../../../Home/Bootstrap/Custom/simple-sidebar.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/71ba2388f7.js" crossorigin="anonymous"></script>
+   </head>
+ 
+    <!-- Top Image -->
+    <header>
+        <div class="row d-flex align-items-center justify-content-center logocontainer">
+                <img src="../../../Home/Images/CloudsSpread.jpg" class="logoback" >        
+                <img src="../../../Home/Images/MasNotesLogo.png" class="logo">
+        </div>
+    </header>
+    <!-- TopImage-->
+
+	<!--Body-->
+    <body style="background-color:black;">
+    
+        <!--SideBar-->
+        <div class="d-flex" id="wrapper">
+
+
+			<!--SidebarWrapper-->
+            <div class="bg-dark border-right border-top text-light sticky-top" id="sidebar-wrapper">
+                <div class="container sticky-top" id="stickyside">
+                    <div class="sidebar-heading text-body">Main Menu </div>
+                    <div class="list-group list-group-flush">
+                        <li class="dropdown list-group-item bg-secondary text-light pt-3 pb-3">
+							<a class="dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+								Adobe
+							</a>      
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            	<a class="dropdown-item" href="OtherPages/Workshops.html">Photoshop</a>
+                                <div class="dropdown-divider"></div>
+                            	<a class="dropdown-item" href="OtherPages/Classes.html">Premier</a>
+                                <div class="dropdown-divider"></div>
+                            	<a class="dropdown-item" href="OtherPages/Training.html">AfterEffects</a>                               
+                            </div>
+                        </li>
+                        <li class="dropdown list-group-item bg-secondary text-light pt-3 pb-3">
+							<a class="dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+								Programming
+							</a>      
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            	<a class="dropdown-item" href="OtherPages/Workshops.html">WebProgramming</a>
+                                <div class="dropdown-divider"></div>
+                            	<a class="dropdown-item" href="OtherPages/Classes.html">GameProgramming</a>
+                                <div class="dropdown-divider"></div>
+                            	<a class="dropdown-item" href="OtherPages/Training.html">AppProgramming</a>                               
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown list-group-item bg-secondary text-light pt-3 pb-3">
+							<a class="dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+								Programming Languages
+							</a>      
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            	<a class="dropdown-item" href="OtherPages/Workshops.html">c++/c#</a>
+                                <div class="dropdown-divider"></div>
+                            	<a class="dropdown-item" href="OtherPages/Classes.html">Python</a>
+                                <div class="dropdown-divider"></div>
+                            	<a class="dropdown-item" href="OtherPages/Training.html">Javascript</a>          
+                                <div class="dropdown-divider"></div>
+                            	<a class="dropdown-item" href="OtherPages/Training.html">HTML/CSS</a>                                 
+                            </div>
+                        </li>
+                        <a href="OtherPages/Store.html" class="list-group-item list-group-item-action bg-secondary text-light">ToBeFilled</a>                        
+      
+						</li>                        
+                        
+                    </div>
+                </div>
+            </div>
+			<!--SideBarWrapper-->
+            
+            
+                
+                <!--pageContentWrapper-->
+                <div id="page-content-wrapper" >
+                    <!--NavBarWrapper-->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom border-top bg-dark sticky-top">
+                        <!--toggleMenuButton-->
+                        <button class="btn btn-secondary" id="menu-toggle">Main Menu</button>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <!--toggleMenuButton-->
+                            
+                            
+                        <!--navBarItems-->
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                                <li class="nav-item active">
+                                    <a class="nav-link text-light" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                          
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        ExampleDropDown
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" >A Link</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" >Another Link</a>
+
+                                    </div>
+                                </li>
+                                    
+                            </ul>
+                        </div>
+                        <!--navBarItems-->
+                    </nav>
+                    <!--NavBarWrapper-->
+
+                    
+                   
+                        <!--DivOne-->
+                        <div class="container border-top">
+                                             
+                            <ul>
+                                <li><a class="text-light" href="SiteOverview/DjangoSiteHome.html"> This Site </a></li>
+                                <li><a class="text-light" href="Django/DjangoHome.html"> Creating A Project </a></li>
+                            <ul>
+
+                        </div>
+                        <!--DivOne-->
+
+
+                        <!--DivTwo-->
+                        <div class="container border-top">
+
+
+                        </div>
+                        <!--DivTwo-->
+
+
+
+                        
+                    </div>
+                    <!--AllPageContent-->
+
+                        
+                </div>
+                <!--PageContentWrapper-->
+                    
+        </div>
+
+    <!--footer-->
+	<footer class="page-footer font-small bg-dark pt-4 text-light border-top fixed">
+
+		<!-- Footer Text -->
+		<div class="container-fluid text-center text-md-left">
+
+			<!-- Grid row -->
+			<div class="row">
+
+				<!-- Grid column -->
+				<div class="col-md-3 mt-md-0 mt-3 text-center">
+                    <div class="flex-center">
+                        <span style="white-space:nowrap;">
+					<!-- Content -->
+                        <!--Facebook-->
+                        <a class="fb-ic" >
+                            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                       
+                        <!--Instagram-->
+                        <a class="ins-ic" >
+                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+
+                        <!--Youtube-->
+                        <a class="ins-ic" >
+                            <i class="fab fa-youtube fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>                 
+                        </span>
+					</div>
+					
+				</div>
+				
+				<!-- Grid column -->
+				<hr class="clearfix w-100 d-md-none pb-3">
+
+				<!-- Grid column -->
+				<div class="col-md mb-md-0 mb-3 text-center">
+					<!-- Content -->
+					<h5 class="text-uppercase font-weight-bold inlineHeader">Phone: </h5><!--<a href="tel:8179440867" class="inlineHeader">(817)944-0867 </a>-->
+				</div>
+				
+				<!-- Grid column -->
+				<div class="col-md mb-md-0 mb-3 text-center">
+
+					<!-- Content -->
+					<h5 class="text-uppercase font-weight-bold inlineHeader">Email: </h5><!--<a href="mailto:ana@circleinsights.com" class="inlineHeader">ana@circleinsights.com </a>-->
+				</div>
+				<!-- Grid column -->
+
+			</div>
+			<!-- Grid row -->
+
+		</div>
+		<!-- Footer Text -->
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">© 2019 Copyright:
+			<!--<a href="https://mdbootstrap.com/education/bootstrap/"> CircleInsights.com</a>-->
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+
+
+        <!--Unlocks tooltips for hovering over items-->
+        <script>
+			$(document).ready(function()
+			{
+				$('[data-toggle="tooltip"]').tooltip();   
+			});
+        </script>
+        
+
+	  <!-- Menu Toggle Script -->
+	  <script>
+		$("#menu-toggle").click(function(e) 
+		{
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled");
+		});
+	  </script>
+
+
+	  
+    </body>
+	
+	
+	
+
+
+</html>
