@@ -1,5 +1,7 @@
+com\github\mason\server\client\NewClient.class
+com\github\mason\server\filemanagement\MyComment.class
+com\github\mason\server\filemanagement\MyComments.class
 com\github\mason\server\Server.class
 com\github\mason\server\filemanagement\MyFile.class
-com\github\mason\server\client\NewClient.class
 com\github\mason\server\client\ClientAbs.class
 com\github\mason\server\serverManagement\MyServer.class

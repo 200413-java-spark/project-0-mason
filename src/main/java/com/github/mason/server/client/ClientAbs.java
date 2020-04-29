@@ -1,5 +1,7 @@
 package com.github.mason.server.client;
 
+import com.github.mason.server.filemanagement.MyFile;
+
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.net.Socket;
@@ -21,6 +23,12 @@ import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
+import java.util.List; // import just the List interface
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.lang.StringBuilder;
+import java.io.InputStream;
+import java.io.PrintStream;
 
 public abstract class ClientAbs extends Thread
 {
@@ -38,6 +46,13 @@ public abstract class ClientAbs extends Thread
     private String input = null;
     private String content = null;
     private int fileLength = 0;
+    private MyFile index = null;
+    private String fname = null;
+    private String lname = null;
+    private String comment = null;
+    private String title = null;
+    private String commentHome = "commenthome/";
+    
 
     @Override
     public void run()
@@ -45,42 +60,31 @@ public abstract class ClientAbs extends Thread
 
         try
         {
-            SetClientRW();
+            SetClientRW();//Set the Readers and Writers
 
             GetClientRequest();
 
 
             if(input != null)
             {
-                RequestParser(input);
+                RequestParser(input);//fill the input
 
-                if(!method.equals("GET") && !method.equals("HEAD"))
+                System.out.println("Requested File: " + fileRequested);
+                
+                if(fileRequested.endsWith("/"))
                 {
-                    System.out.println("File Not Found");
+                    fileRequested += deFile;
                 }
-                else
+
+                File file = FillInput();
+
+                if(method.equals("GET"))
                 {
-                    
-                    if(fileRequested.endsWith("/"))
-                    {
-                        fileRequested += deFile;
-                    }
 
-                    File file = FillInput();
+                    SendText(file);
 
-                    if(method.equals("GET"))
-                    {
-                        if(content.contains("image"))
-                        {
-                            SendMedia(file);
-                        }
-                        else
-                        {
-                            SendText(file);
-                        }
-                    }
-                    System.out.println("***************************");
                 }
+
             }
             else
             {
@@ -92,7 +96,6 @@ public abstract class ClientAbs extends Thread
         catch(Exception e)
         {
             System.out.println("Something went wrong getting the request");
-            e.printStackTrace();
         }
         finally
         {
@@ -106,15 +109,20 @@ public abstract class ClientAbs extends Thread
             catch(Exception e)
             {
                 System.out.println("Something went wrong closing everything");
-                e.printStackTrace();
             }
         }
+        System.out.println("***************************");
 
     }
     
     public void setClientSocket(Socket c)
     {
         client = c;
+    }
+
+    public void setIndex(MyFile ind)
+    {
+        index = ind;
     }
 
     private void SetClientRW()
@@ -124,7 +132,7 @@ public abstract class ClientAbs extends Thread
             requestReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             requestWriter = new PrintWriter(client.getOutputStream());//printwriter linked to client stream
             dataOut = new BufferedOutputStream(client.getOutputStream());//bufferedOutputStream linked to client
-            imageOut = client.getOutputStream();//
+            imageOut = client.getOutputStream();
 
         }
         catch(IOException e)
@@ -132,12 +140,6 @@ public abstract class ClientAbs extends Thread
             System.out.println("Failed to oppen connections");
             
         }
-        finally
-        {
-            System.out.println("Readers & Writers open");
-            
-        }
-
     }
 
     private void GetClientRequest()
@@ -145,12 +147,8 @@ public abstract class ClientAbs extends Thread
         try
         {
             input = requestReader.readLine();
-//s            String tmp = requestReader.readLine();
-//            while(tmp!=null)
-//            {
-//                System.out.println("MyInput: "+ tmp);
-//                tmp = requestReader.readLine();
-//            }
+
+            
         }
         catch(IOException e)
         {
@@ -163,17 +161,78 @@ public abstract class ClientAbs extends Thread
     {
         File file = new File(WebRoot, fileRequested);
         String name = file.getName();
-        System.out.println("FileName: " + name);
         fileLength = (int) file.length();
         content = getContentType(fileRequested);
         return file;
     }
-    private void RequestParser(String input)
+    private void RequestParser(String input) throws Exception
     {
         StringTokenizer parse = new StringTokenizer(input);
         method = parse.nextToken().toUpperCase();
-        fileRequested = parse.nextToken().toLowerCase();
-        //System.out.println("Requested file: " +fileRequested);
+        fileRequested = parse.nextToken();//.toLowerCase();
+        //reparse fileRequested if there is extra stuff
+        if(fileRequested.indexOf("fname=") != -1)
+        {
+            System.out.println("Request get has variables");
+            String[] frVariables = fileRequested.split("\\?");
+            fileRequested = frVariables[0];
+            
+            System.out.println("Varibles = " + frVariables[1]);
+
+            String[] var1Var2Var3 = frVariables[1].split("&");
+            
+            System.out.println("Var1 = " + var1Var2Var3[0]);
+            fname = var1Var2Var3[0].replace("fname=","");
+            System.out.println("Var1 fname: " + fname);
+
+            System.out.println("Var2 = " + var1Var2Var3[1]);
+            lname = var1Var2Var3[1].replace("lname=","");
+            System.out.println("Var2 lname: " + lname);
+
+            System.out.println("Var3 = " + var1Var2Var3[2]);
+            title = var1Var2Var3[2].replace("title=","");
+            System.out.println("Var3 Title: " + title);
+            if(title.contains("+"))
+            {
+                title = title.replace("+", " ");
+            }
+            System.out.println("Var3 Title2: " + title);
+
+            System.out.println("Var4 = " + var1Var2Var3[3]);
+            comment = var1Var2Var3[3].replace("comment = ","");
+            System.out.println("Var4 comment: " + comment);
+            //+ = " "
+            //%0D%0A = Enter
+            //%21 = ! 
+            // %3F = ?
+            //%2 = ,
+            String paragraphs = comment.replaceAll("\\%0D\\%0A","+");// Shorten Paragraphs and make them scentences
+            paragraphs = paragraphs.replace("comment=","");
+
+            System.out.println("realComment = " + paragraphs);
+
+            String sentences = paragraphs.replace("+", " ");
+
+            System.out.println("sentences = " + sentences);
+
+            sentences = sentences.replaceAll("%21","!");
+            sentences = sentences.replaceAll("%3F","?");
+            sentences = sentences.replaceAll("%2C","\\,");
+
+            System.out.println("sentences2 = " + sentences);
+            PrintStream tmpIndex = new PrintStream(new File(commentHome + title  + ".txt"));
+            tmpIndex.println(fname);
+            tmpIndex.println(lname);
+            tmpIndex.println(title);
+            tmpIndex.println(sentences);
+            tmpIndex.close();
+
+        }
+
+        fileRequested = fileRequested.toLowerCase();
+        System.out.println("FileRequested = " + fileRequested);
+
+        index.CreateIndexFile();
     }
 
     private String getContentType(String fileRequested)
@@ -181,62 +240,21 @@ public abstract class ClientAbs extends Thread
         String type = null;
         if(fileRequested.endsWith(".htm") || fileRequested.endsWith(".html"))
         {
-            //System.out.println("Content type = text/html");
             type = "text/html";
-        }
-        if(fileRequested.endsWith(".ico"))
-        {
-            //System.out.println("Content type = image/x-icon");
-            type = "image/x-icon";
-        }
-        if(fileRequested.endsWith(".png"))
-        {
-            //System.out.println("Content type = image/png");
-            type = "image/png";
-        }
-        if(fileRequested.endsWith(".jpg"))
-        {
-            //System.out.println("Content type = image/jpeg");
-            type = "image/jpeg";
         }
         if(fileRequested.endsWith(".css"))
         {
-            //System.out.println("Content type = text/css");
             type = "text/css";
         }
-
-        System.out.println("Final Content Type: " + type);
         return type;
     }
 
-    private void SendMedia(File file) throws Exception
-    {
-        dataOut = new BufferedOutputStream( client.getOutputStream() );
-        // f is the file to be sent to the client.
-        BufferedInputStream reader = new BufferedInputStream( new FileInputStream( file ) );//read file and transfer it
-        // send OK headers and content length using f.length()
-        byte[] buffer = new byte[ 4096 ];
-        int bytesRead;
-        while ( (bytesRead = reader.read(buffer)) != -1 )
-        {
-            dataOut.write( buffer, 0, bytesRead );
-        }
-        reader.close();
-        dataOut.flush();
-
-    }
-
-
-
     private void SendText(File file) throws Exception
     {
-       
-        
+               
         byte[] fileData = readFileData(file);
-
         
         SendHeader();
-
 
         dataOut.write(fileData, 0, fileLength);
         dataOut.flush();
